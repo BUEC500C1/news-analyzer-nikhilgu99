@@ -10,13 +10,13 @@ class fullNLP:
 
 # Functions
 
-def upload(filename):
+def uploadNLP(filename):
 
-    return("File successfully uploaded.")
+    return("File successfully uploaded for NLP analysis.")
 
 def getFullAnalysis():
+    
     retVal = fullNLP("call sentiment function here", ["call link", "function here"])
-
     return retVal
 
 def getTranslation(language):
