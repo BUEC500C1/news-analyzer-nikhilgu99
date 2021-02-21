@@ -31,5 +31,4 @@
     - findKeywords(*number*) - Find the top *number* most common keywords amongst the news articles, return a list containing the keywords
     - findNews(*number*, *words[]*, "*filename*") - Find a number of related online news articles to a specific set of keywords, and store their URL's in the given filename, return a string denoting the operations status
     - findSentiment("*filename*") - Gathers an overall sentiment evaluation of all the URL's in a given file, returns a string with the sentiment
-    - setSentiment("*sentiment*")- Changes the sentiment to the provided string if the user believes the determined one was incorrect
 - Data: The input data would be a text file with one URL per line, where each URL ideally is an identifiable news article. Other handled data here is the sentiment string, and a list containing found common keywords amongst the URL's
