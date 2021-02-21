@@ -7,7 +7,7 @@ import pytest
 
 # Upload individual tests
 
-assert checkStatus() = "Failure - File Too Large!"
+assert checkStatus() == "Failure - File Too Large!"
 
 # NLP individual tests
 
@@ -30,4 +30,4 @@ assert getRelevantLinks(2) == "Successfully found and saved links" # Get some re
 assert addURL("url", "links.txt") == "Successfully added URL" # Add URL to text file, could use this in for loop with previous function
 assert findKeywords(5) == ["word1", "word2"] # Find keywords amongst the URL's articles from previous function
 assert findNews(5, ["word1", "word2"], "news.txt") == "Successfully found and added news" # Find related news articles using the keywords from the previous function
-assert findSentiment("news.txt") # Gather an overall sentiment from the found news articles of the previous function
+assert findSentiment("news.txt") == "Determined Sentiment: Positive" # Gather an overall sentiment from the found news articles of the previous function
