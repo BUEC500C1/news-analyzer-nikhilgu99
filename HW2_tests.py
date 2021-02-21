@@ -1,6 +1,6 @@
-from upload import *
-from NLP import *
-from news import *
+from upload import upload, checkStatus
+from NLP import uploadNLP, getFullAnalysis, getTranslation, getRelevantLinks, getSentiment
+from news import addURL, findKeywords, findNews, findSentiment
 import pytest
 
 # I will do both individual tests and a simulation of 3 modules working together where applicable
