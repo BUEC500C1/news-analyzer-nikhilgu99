@@ -15,7 +15,7 @@
 
 - User Story: A user can upload a text file and Neural Language Processing (NLP) analysis on it to get certain types of data about it. 
 - Operations:
-    - upload("*text_file*") - Upload a text file to do NLP analysis on, return string saying if upload is successful and valid, or if an error has occured(invalid filetype, file too large, network error, etc.)
+    - uploadNLP("*text_file*") - Upload a text file to do NLP analysis on, return string saying if upload is successful and valid, or if an error has occured(invalid filetype, file too large, network error, etc.)
     - getFullAnalysis() - Retrieve all analysis data and return an object containing all data
     - getTranslation("*language*") - Translate file to a specified language, save as another text file, return string stating status of translating text file
     - getSentiment() - Perform sentiment analysis on file, return a string stating analysis results
