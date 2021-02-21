@@ -17,9 +17,9 @@
 - Operations:
     - upload("*text_file*") - Upload a text file to do NLP analysis on, return string saying if upload is successful and valid, or if an error has occured(invalid filetype, file too large, network error, etc.)
     - getFullAnalysis() - Retrieve all analysis data and return an object containing all data
-    - getTranslation("*language*") - Translate file to a specified language, return translated text file
+    - getTranslation("*language*") - Translate file to a specified language, save as another text file, return string stating status of translating text file
     - getSentiment() - Perform sentiment analysis on file, return a string stating analysis results
-    - getRelevantLinks() - Find keywords in the file, and perform a lookup for similar documents online, return an object containing a list of links
+    - getRelevantLinks(*number*) - Find *number* keywords in the file, and perform a lookup for similar documents online, create a text file containing a list of links, return string with status of operation
 - Data: The input data is the text file uploaded by the user. Intermediary data is not seen here as it is handled by the NLP API. Output data depends on the requested analyses, which can either be an object, a text file, or a string
 
 
