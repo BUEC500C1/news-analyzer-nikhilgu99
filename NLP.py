@@ -15,8 +15,9 @@ def upload(filename):
     return("File successfully uploaded.")
 
 def getFullAnalysis():
+    retVal = fullNLP("call sentiment function here", ["call link", "function here"])
 
-    return 0
+    return retVal
 
 def getTranslation(language):
 
