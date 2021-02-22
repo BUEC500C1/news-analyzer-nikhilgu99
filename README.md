@@ -2,6 +2,8 @@
 
 ## Homework 2
 
+### *Note:* I have the logging information/procedures happening in the test file right now, they will be moved to the respective modules when further implementation happens- in the conditional branches.
+
 ### Secure File Uploader / Ingestor - Entity Based API
 
 - User Story: A user can securely upload a file of specific formats to be converted into a text file for processing by the *Text NLP Analysis* module.
