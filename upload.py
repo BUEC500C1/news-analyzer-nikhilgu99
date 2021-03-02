@@ -3,14 +3,11 @@
 import logging
 
 logging.basicConfig(filename='test.log', level=logging.DEBUG)
-# NOTE: For logs, warnings can show up in instances when a user is inputting a filetype. Errors
-#  can show up when there are network errors, file handling errors, or memory related erros. 
+# NOTE: For logs, warnings can show up in instances when a user is uploading a file. Errors
+# can show up when there are network errors, file handling errors, or memory related erros. 
 # In my test cases I will only be showing informational logs regarding successful use of the module.
 
 # Data
-
-# file -> the file to be converted
-status = ""
 
 #Functions
 
@@ -19,7 +16,17 @@ def upload(filename):
 
     return "File Upload Successful!"
 
-def checkStatus():
-    logging.info("User checked status of file upload")
+def read(filename):
+    logging.info("User requested file for retrieval")
 
-    return "Failure - File Too Large!"
+    return "File Successfully Retrieved!"
+
+def update(filename):
+    logging.info("User updated a files information")
+
+    return "File Successfully Updated!"
+
+def delete(filename):
+    logging.info("User deleted a file")
+
+    return "File Successfully Deleted!"
