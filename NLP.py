@@ -11,22 +11,22 @@ logging.basicConfig(filename='test.log', level=logging.DEBUG)
 
 # Functions
 
-def getSentiment(text):
+def getSentiment(text): # Perform sentiment analysis on a text (Positive, Neutral, Negative)
     logging.info("User has gotten sentiment of text")
 
     return("Score: 0.9 (Positive)")
 
-def getEntities(text):
+def getEntities(text): # Perform entity analysis on a text (names, nouns, places, etc.)
     logging.info("User has gotten entities found in text")
 
     return("Found xyz names, xyz nouns, xyz place.")
 
-def getEntitySentiment(text):
+def getEntitySentiment(text): # Perform both sentiment and entity analysis on a text
     logging.info("User has gotten sentiment and entities of text")
 
     return("Score: 0.9 (Positive)- Found xyz names, xyz nouns.")
 
-def getClassification(text):
+def getClassification(text): # Classify a text into a general topic / field
     logging.info("User has classified text by topic.")
 
     return("Topic: Computer Science - Confidence: 0.9")
