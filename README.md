@@ -2,35 +2,30 @@
 
 ## Homework 2
 
-### *Note:* I have the logging information/procedures happening in the test file right now, they will be moved to the respective modules when further implementation happens- in the conditional branches.
-
 ### Secure File Uploader / Ingestor - Entity Based API
 
-- User Story: A user can securely upload a file of specific formats to be converted into a text file for processing by the *Text NLP Analysis* module.
+- User Story: A user can securely upload a PDF file to be converted into a text file for processing by the *Text NLP Analysis* module.
 - Operations: 
-    - upload("*filename*") - Upload a file to be converted, will return either a converted text file, or a text file containing an error message (ex: incompatible file type, file too large, bad connection)
-    - checkStatus() - Check the status of an uploaded file, will return a string containing the status, which can either be "Success", "Failure - *reason for failure*", or "Progress - *##%*"
-- Data: The data handled in this module is the raw file being uploaded, and the text file with the converted file data, which will have the same filename as given, but with the .txt extension
+    - upload("*filename*") - Upload a file to be converted, will return a message indicating status
+    - read("*filename*") - Retrieve a text file for viewing, will return a message indicating status, and print text to GUI (?)
+    - update("*filename*","*id*","*value*") - Update the attributes / metadata of a text file, will return a string indicating the status of the operation
+    - delete("*filename*") - Delete a file from the database, will return the status of the operation
 
 
 ### Text NLP Analysis - Procedure Based API
 
-- User Story: A user can upload a text file and Neural Language Processing (NLP) analysis on it to get certain types of data about it. 
+- User Story: A user can upload text and run Neural Language Processing (NLP) analysis on it to get certain types of information about the text. (Current stub based off of Google NLP API)
 - Operations:
-    - uploadNLP("*text_file*") - Upload a text file to do NLP analysis on, return string saying if upload is successful and valid, or if an error has occured(invalid filetype, file too large, network error, etc.)
-    - getFullAnalysis() - Retrieve all analysis data and return an object containing all data
-    - getTranslation("*language*") - Translate file to a specified language, save as another text file, return string stating status of translating text file
-    - getSentiment() - Perform sentiment analysis on file, return a string stating analysis results
-    - getRelevantLinks(*number*) - Find *number* keywords in the file, and perform a lookup for similar documents online, create a text file containing a list of links, return string with status of operation
-- Data: The input data is the text file uploaded by the user. Intermediary data is not seen here as it is handled by the NLP API. Output data depends on the requested analyses, which can either be an object, a text file, or a string
+    - getSentiment("*text*") - Perform sentiment analysis on text, return a string stating analysis results
+    - getEntities("*text*") - Perform entity analysis on text, return a string stating analysis results
+    - getEntitySentiment("*text*") - Perform both entity and sentiment analysis on text, return a string stating analysis results
+    - getClassification("*text*") - Perform content classification by topic, return a string stating analysis results
 
 
 ### News Feed Ingestor - Procedure Based API
 
-- User Story: A user can organize a database of new articles URL's, and analyze relations between them to better understand them. In this case the database would be a text file with a single URL per line.
+- User Story: A user can search a database of news articles, and analyze relations between them to better understand them. In this case the database would be conncted to some public news API.
 - Operations:
-    - addURL("*url*", "*filename*") - Add a URL to a specified file, or create the file if it doesn't exist, return a string with the status of the operation
-    - findKeywords(*number*) - Find the top *number* most common keywords amongst the news articles, return a list containing the keywords
-    - findNews(*number*, *words[]*, "*filename*") - Find a number of related online news articles to a specific set of keywords, and store their URL's in the given filename, return a string denoting the operations status
-    - findSentiment("*filename*") - Gathers an overall sentiment evaluation of all the URL's in a given file, returns a string with the sentiment
-- Data: The input data would be a text file with one URL per line, where each URL ideally is an identifiable news article. Other handled data here is the sentiment string, and a list containing found common keywords amongst the URL's
+    - queryKeywords(*words[]*) - Return a list of articles related to a list of given keywords
+    - queryPerson("*name*") - Return a list of articles related to a given person's name
+    - queryHistorical(*year*, *month*, *words[]*) - Return a list of articles during a certain month/year, related to a given list of words
