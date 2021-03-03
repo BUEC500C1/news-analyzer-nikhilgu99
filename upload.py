@@ -14,19 +14,25 @@ logging.basicConfig(filename='test.log', level=logging.DEBUG)
 def upload(filename):
     logging.info("User uploaded a file for text translation")
 
-    return "File Upload Successful!"
+    if filename.endswith(".pdf") or filename.endswith(".txt"):
+        return "Upload Successful"
+    else:
+        return "Invalid Filetype"
 
 def read(filename):
     logging.info("User requested file for retrieval")
 
-    return "File Successfully Retrieved!"
+    return "Successfully Retrieved"
 
-def update(filename):
+def update(filename, id, value):
     logging.info("User updated a files information")
 
-    return "File Successfully Updated!"
+    if id == "name":
+        return "Successfully Updated"
+    else:
+        return "Invalid File Attribute"
 
 def delete(filename):
     logging.info("User deleted a file")
 
-    return "File Successfully Deleted!"
+    return "Successfully Deleted"
