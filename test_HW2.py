@@ -1,33 +1,27 @@
-from upload import upload, checkStatus
-from NLP import uploadNLP, getFullAnalysis, getTranslation, getRelevantLinks, getSentiment
-from news import addURL, findKeywords, findNews, findSentiment
-
-# I will do both individual tests and a simulation of 3 modules working together where applicable
+import upload as fu # fu = file upload
+import NLP as nlp   # nlp = NLP
+import news as nf   # nf = news feed 
 
 def testModules(): 
-    # Upload individual tests
+    
+    # Secure File Uploader Tests
 
-    assert checkStatus() == "Failure - File Too Large!"
+    assert fu.upload("file.pdf") == "Upload Successful"
+    assert fu.upload("file.png") == "Invalid Filetype"
+    assert fu.read("file.txt") == "Successfully Retrieved"
+    assert fu.update("file.txt", "name", "new.txt") == "Successfully Updated"
+    assert fu.update("file.txt", "size", "2mb") == "Invalid File Attribute"
+    assert fu.delete("new.txt") == "Successfully Deleted"
 
-    # NLP individual tests
+    # NLP Tests
 
-    data = getFullAnalysis()
+    assert nlp.getSentiment("sentence") == "Score: 0.9 (Positive)"
+    assert nlp.getEntities("sentence") == "Found xyz names, xyz nouns, xyz place."
+    assert nlp.getEntitySentiment("sentence") == "Score: 0.9 (Positive)- Found xyz names, xyz nouns."
+    assert nlp.getClassification("sentence") == "Topic: Computer Science - Confidence: 0.9"
 
-    assert data.sentiment == "call sentiment function here"
-    assert data.relevantLinks == ["call link", "function here"]
+    # Newsfeed Ingestor Tests
 
-    # News individual tests - None
-
-    # Combination tests
-
-    assert upload("test.docx") == "File Upload Successful!" # Upload a file to be translated to a txt file
-
-    assert uploadNLP("test.txt") == "File successfully uploaded for NLP analysis." # Upload a txt for NLP
-    assert getTranslation("Spanish") == "Translation successful" # Translate the file
-    assert getSentiment() == "Positive" # Get the sentiment of the text file
-    assert getRelevantLinks(2) == "Successfully found and saved links" # Get some related documents
-
-    assert addURL("url", "links.txt") == "Successfully added URL" # Add URL to text file, could use this in for loop with previous function
-    assert findKeywords(5) == ["word1", "word2"] # Find keywords amongst the URL's articles from previous function
-    assert findNews(5, ["word1", "word2"], "news.txt") == "Successfully found and added news" # Find related news articles using the keywords from the previous function
-    assert findSentiment("news.txt") == "Determined Sentiment: Positive" # Gather an overall sentiment from the found news articles of the previous function
+    assert nf.queryKeywords(["word1", "word2"]) == "Article 1 URL | Article 2 URL | Article 3 URL"
+    assert nf.queryPerson("Nikhil Gupta") == "Article 1 URL | Article 2 URL | Article 3 URL"
+    assert nf.queryHistorical(2019,11,["word1", "word2"]) == "Article 1 URL | Article 2 URL | Article 3 URL"
