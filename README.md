@@ -33,4 +33,4 @@
 
 ### Database Configuration
 
-This API uses the SQLite3 library. I have a table called "files" to store information about pdf and text files uploaded by the file upload API. The columns in this table are file ID, filename, and data.
+This API uses the SQLite3 library. I have a table called "files" to store information about pdf and text files uploaded by the file upload API. The columns in this table are file ID, filename, upload data, and data. Currently, I have files being updated through a web URL, soon this will be changed to a GUI in browser.
