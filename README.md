@@ -29,3 +29,8 @@
     - queryKeywords(*words[]*) - Return a list of articles related to a list of given keywords
     - queryPerson("*name*") - Return a list of articles related to a given person's name
     - queryHistorical(*year*, *month*, *words[]*) - Return a list of articles during a certain month/year, related to a given list of words
+
+
+### Database Configuration
+
+This API uses the SQLite3 library. I have a table called "files" to store information about pdf and text files uploaded by the file upload API. The columns in this table are file ID, filename, and data.
