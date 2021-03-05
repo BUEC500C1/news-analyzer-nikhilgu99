@@ -1,18 +1,19 @@
 import flask
-from flask import request, jsonify
+import sqlite3
+from flask import render_template, request, jsonify
 
-app = flask.Flask(__name__)
+app = flask.Flask(__name__, template_folder="html")
 app.config["DEBUG"] = True
 
 @app.route("/", methods=['GET'])
 def home(): # Home page for project 
-    return "<h1>News Analyzer Project</h1>"
+    return render_template('main.html')
 
 ### FILE UPLOAD API ###
 
 @app.route("/fileupload", methods=['GET'])
 def fu_all(): # Home page for File Upload API
-    return "<h1>File Uploader API</h1>"
+    return render_template('fileupload.html')
 
 @app.route("/fileupload/upload", methods=['GET'])
 def fu_upload(): # Upload file to the database
@@ -59,7 +60,7 @@ def fu_delete(): # Delete a file from the database
 
 @app.route("/nlp", methods=['GET'])
 def nlp_all():
-    return "<h1>NLP Analysis API</h1>"
+    return render_template('nlp.html')
 
 @app.route("/nlp/sentiment", methods=['GET'])
 def nlp_sentiment():
@@ -93,7 +94,7 @@ def nlp_classify():
 
 @app.route("/newsfeed", methods=['GET'])
 def nf_all():
-    return "<h1>Newsfeed Ingestor API</h1>"
+    return render_template('newsfeed.html')
 
 @app.route("/newsfeed/keywords", methods=['GET'])
 def nf_keywords():
