@@ -16,7 +16,8 @@ def upload(filename): # Upload a PDF file to be converted, or a text file, and s
 
     date = datetime.datetime.now()
     con = None
-    
+    pdfObj = None
+
     try:
         con = sqlite3.connect('app.db') # Connect to the database
     except:
@@ -26,7 +27,13 @@ def upload(filename): # Upload a PDF file to be converted, or a text file, and s
     cursor = con.cursor()
     cursor.execute('SELECT * FROM files') # To get the number of rows for the file_id
 
-    input = PyPDF2.PdfFileReader(open(filename, 'rb'))
+    try:
+        pdfObj = open(filename, 'rb')
+    except:
+        logging.error("ERROR: Invalid filetype uploaded")
+        return "Error: Invalid filetype uploaded!"
+
+    input = PyPDF2.PdfFileReader(pdfObj)
     data = ""
     for x in range(input.numPages): # Get text from all the PDF pages
         data += input.getPage(x).extractText()
@@ -61,5 +68,3 @@ def delete(filename): # Delete a file from the database
     logging.info("User deleted a file")
 
     return "Successfully Deleted"
-
-upload('test.pdf')

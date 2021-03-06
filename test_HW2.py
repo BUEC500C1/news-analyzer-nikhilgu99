@@ -6,8 +6,8 @@ def testModules():
     
     # Secure File Uploader Tests
 
-    assert fu.upload("file.pdf") == "Upload Successful"
-    assert fu.upload("file.png") == "Invalid Filetype"
+    assert fu.upload("test.pdf") == "Upload Successful"
+    assert fu.upload("file.png") == "Error: Invalid filetype uploaded!"
     assert fu.read("file.txt") == "Successfully Retrieved"
     assert fu.update("file.txt", "name", "new.txt") == "Successfully Updated"
     assert fu.update("file.txt", "size", "2mb") == "Invalid File Attribute"
