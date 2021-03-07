@@ -7,9 +7,9 @@
 - User Story: A user can securely upload a PDF file to be converted into a text file for processing by the *Text NLP Analysis* module.
 - Operations: 
     - upload("*filename*") - Upload a file to be converted, will return a message indicating status
-    - read("*filename*") - Retrieve a text file for viewing, will return a message indicating status, and print text to GUI (?)
-    - update("*filename*","*id*","*value*") - Update the attributes / metadata of a text file, will return a string indicating the status of the operation
-    - delete("*filename*") - Delete a file from the database, will return the status of the operation
+    - read("*file_id*") - Retrieve a text file for viewing, will return a message indicating status, and print text to GUI (?)
+    - update("*file_id*","*id*","*value*") - Update the attributes / metadata of an uploaded file, will return a string indicating the status of the operation
+    - delete("*file_id*") - Delete a file from the database, will return the status of the operation
 
 
 ### Text NLP Analysis - Procedure Based API
