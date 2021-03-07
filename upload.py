@@ -79,12 +79,29 @@ def read(file_id): # Read a text file from the database
         return "Successfully Retrieved"
 
 def update(file_id, id, value): # Update the attributes / metadata of a text file
-    logging.info("User updated a files information")
 
-    if id == "name":
+    if (id == "filename") or (id == "upload_date") or (id == "data"):
+
+        con = None
+
+        try:
+            con = sqlite3.connect('app.db') # Connect to the database
+        except:
+            logging.error("ERROR: Failed to connect to database")
+            return "Error: Failed to connect to database!"
+
+        fileSecure = (value,file_id) # Secure way of doing SQL query
+        cursor = con.cursor()
+        query = 'UPDATE files SET ' + id + ' = ? WHERE file_id = ?'
+        cursor.execute(query, fileSecure)
+        con.commit()
+        con.close()
+        logging.info("User updated a files attribute")
         return "Successfully Updated"
+        
     else:
-        return "Invalid File Attribute"
+        logging.error("ERROR: Invalid file attribute given for update parameter")
+        return "Error: Invalid File Attribute"
 
 def delete(file_id): # Delete a file from the database
 

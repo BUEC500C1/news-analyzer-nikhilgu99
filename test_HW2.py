@@ -8,12 +8,11 @@ def testModules():
 
     assert fu.upload("test.pdf") == "Upload Successful" # Created with file_id = 2
     assert fu.upload("file.png") == "Error: Invalid filetype uploaded!"
-    assert fu.read(1) == "Successfully Retrieved"
+    assert fu.read(2) == "Successfully Retrieved"
     assert fu.read(1000) == "Error: No file found under the given file ID!"
-    assert fu.update("file.txt", "name", "new.txt") == "Successfully Updated"
-    assert fu.update("file.txt", "size", "2mb") == "Invalid File Attribute"
-    assert fu.delete(2) == "Successfully Deleted" # Delete the entry created above 
-    assert fu.delete(1000) == "Error: No file found under the given file ID!"
+    assert fu.update(1, "filename", "newname") == "Successfully Updated"
+    assert fu.update(1, "size", "2mb") == "Error: Invalid File Attribute"
+    assert fu.delete(2) == "Successfully Deleted" # Delete the entry created above
 
     # NLP Tests
 
