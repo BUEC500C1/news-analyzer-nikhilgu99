@@ -65,14 +65,20 @@ def read(file_id): # Read a text file from the database
 
     fileSecure = (file_id,) # Secure way of doing SQL query
     cursor = con.cursor()
-    cursor.execute('SELECT data FROM files where file_id=?', fileSecure)
+    cursor.execute('SELECT data FROM files WHERE file_id=?', fileSecure)
+    data = cursor.fetchone()
 
-    if(cursor.fetchone() == None):
-        return "Error: No file found under the given file ID"
+    if(data is None):
+        con.close()
+        logging.error("ERROR: No file found under the given file ID")
+        return "Error: No file found under the given file ID!"
     else:
+        print(data[0]) # data is a tuple, get the text from it
+        con.close()
+        logging.info("File successfully retrieved from the database")
         return "Successfully Retrieved"
 
-def update(filename, id, value): # Update the attributes / metadata of a text file
+def update(file_id, id, value): # Update the attributes / metadata of a text file
     logging.info("User updated a files information")
 
     if id == "name":
@@ -80,7 +86,21 @@ def update(filename, id, value): # Update the attributes / metadata of a text fi
     else:
         return "Invalid File Attribute"
 
-def delete(filename): # Delete a file from the database
-    logging.info("User deleted a file")
+def delete(file_id): # Delete a file from the database
+
+    con = None
+
+    try:
+        con = sqlite3.connect('app.db') # Connect to the database
+    except:
+        logging.error("ERROR: Failed to connect to database")
+        return "Error: Failed to connect to database!"
+
+    fileSecure = (file_id,) # Secure way of doing SQL query
+    cursor = con.cursor()
+    cursor.execute('DELETE FROM files WHERE file_id=?', fileSecure)
+    con.commit()
+    con.close()
+    logging.info("User deleted a file record")
 
     return "Successfully Deleted"
