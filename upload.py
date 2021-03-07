@@ -28,12 +28,12 @@ def upload(filename): # Upload a PDF file to be converted, or a text file, and s
     cursor.execute('SELECT * FROM files') # To get the number of rows for the file_id
 
     try:
-        pdfObj = open(filename, 'rb')
+        pdfObj = open(filename, 'rb') # Open the file in binary mode
     except:
         logging.error("ERROR: Invalid filetype uploaded")
         return "Error: Invalid filetype uploaded!"
 
-    input = PyPDF2.PdfFileReader(pdfObj)
+    input = PyPDF2.PdfFileReader(pdfObj) # Create the PyPDF2 compatible object
     data = ""
     for x in range(input.numPages): # Get text from all the PDF pages
         data += input.getPage(x).extractText()
@@ -46,15 +46,31 @@ def upload(filename): # Upload a PDF file to be converted, or a text file, and s
     cursor.execute('INSERT INTO files VALUES (?,?,?,?)', entry)
     con.commit()
     con.close()
+    pdfObj.close()
 
     logging.info("Successfully uploaded a file to the database")
 
     return "Upload Successful"
 
-def read(filename): # Read a text file from the database
+def read(file_id): # Read a text file from the database
     logging.info("User requested file for retrieval")
 
-    return "Successfully Retrieved"
+    con = None
+
+    try:
+        con = sqlite3.connect('app.db') # Connect to the database
+    except:
+        logging.error("ERROR: Failed to connect to database")
+        return "Error: Failed to connect to database!"
+
+    fileSecure = (file_id,) # Secure way of doing SQL query
+    cursor = con.cursor()
+    cursor.execute('SELECT data FROM files where file_id=?', fileSecure)
+
+    if(cursor.fetchone() == None):
+        return "Error: No file found under the given file ID"
+    else:
+        return "Successfully Retrieved"
 
 def update(filename, id, value): # Update the attributes / metadata of a text file
     logging.info("User updated a files information")

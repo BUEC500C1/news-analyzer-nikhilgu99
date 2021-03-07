@@ -8,7 +8,8 @@ def testModules():
 
     assert fu.upload("test.pdf") == "Upload Successful"
     assert fu.upload("file.png") == "Error: Invalid filetype uploaded!"
-    assert fu.read("file.txt") == "Successfully Retrieved"
+    assert fu.read(1) == "Successfully Retrieved"
+    assert fu.read(2) == "Error: No file found under the given file ID"
     assert fu.update("file.txt", "name", "new.txt") == "Successfully Updated"
     assert fu.update("file.txt", "size", "2mb") == "Invalid File Attribute"
     assert fu.delete("new.txt") == "Successfully Deleted"
