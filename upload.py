@@ -28,7 +28,7 @@ def upload(filename): # Upload a PDF file to be converted, or a text file, and s
     cursor.execute('SELECT * FROM files') # To get the number of rows for the file_id
 
     try:
-        pdfObj = open(filename, 'rb') # Open the file in binary mode
+        pdfObj = open('uploads/' + filename, 'rb') # Open the file in binary mode
     except:
         logging.error("ERROR: Invalid filetype uploaded")
         return "Error: Invalid filetype uploaded!"

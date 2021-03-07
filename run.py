@@ -1,9 +1,13 @@
 import flask
+import os
 import sqlite3
-from flask import render_template, request, jsonify
+import upload as fu # file upload
+from flask import render_template, request
+from werkzeug.utils import secure_filename
 
 app = flask.Flask(__name__, template_folder="html")
 app.config["DEBUG"] = True
+app.config["UPLOAD_FOLDER"] = "/Users/Nikhil/git/news-analyzer-nikhilgu99/uploads"
 
 @app.route("/", methods=['GET'])
 def home(): # Home page for project 
@@ -15,14 +19,20 @@ def home(): # Home page for project
 def fu_all(): # Home page for File Upload API
     return render_template('fileupload.html')
 
-@app.route("/fileupload/upload", methods=['GET'])
+@app.route("/fileupload/upload", methods=['GET', 'POST'])
 def fu_upload(): # Upload file to the database
 
-    if 'filename' in request.args:
-        filename = str(request.args['filename'])
-        return "Uploaded " + filename
-    else:
-        return "Error: File Not Found"
+    if request.method == 'POST':
+        f = request.files['file']
+
+        if f.filename.endswith(".pdf"): # Error checking the filetype 
+            f.save(os.path.join(app.config['UPLOAD_FOLDER'], secure_filename(f.filename)))
+            fu.upload(f.filename) # Call the API and upload the file
+            return "Uploaded file: " + f.filename
+        else:
+            return "Invalid file uploaded, PDF files only"
+    else: # GET request, do nothing here
+        return "Go back to the home page to upload a file!"
 
 @app.route("/fileupload/read", methods=['GET'])
 def fu_read(): # Grab file from the database
