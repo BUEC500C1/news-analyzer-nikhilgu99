@@ -43,14 +43,14 @@ def upload(filename): # Upload a PDF file to be converted, or a text file, and s
     #print("upload_date: " + date.strftime('%x'))
     #print("data: " + data)
     entry = (len(cursor.fetchall()), filename, date.strftime('%x'), data) # Secure way of inserting
-    cursor.execute('INSERT INTO files VALUES (?,?,?,?)', entry)
+    cursor.execute('INSERT INTO files VALUES (?,?,?,?)', entry) # Insert the data into the database
     con.commit()
     con.close()
     pdfObj.close()
 
     logging.info("Successfully uploaded a file to the database")
 
-    return "Upload Successful"
+    return "Successfully uploaded file"
 
 def read(file_id): # Read a text file from the database
     logging.info("User requested file for retrieval")
@@ -92,11 +92,11 @@ def update(file_id, id, value): # Update the attributes / metadata of a text fil
         fileSecure = (value,file_id) # Secure way of doing SQL query
         cursor = con.cursor()
         query = 'UPDATE files SET ' + id + ' = ? WHERE file_id = ?'
-        cursor.execute(query, fileSecure)
+        cursor.execute(query, fileSecure) # Update the file in the database
         con.commit()
         con.close()
         logging.info("User updated a files attribute")
-        return "Successfully Updated"
+        return "Successfully updated file"
         
     else:
         logging.error("ERROR: Invalid file attribute given for update parameter")
@@ -114,9 +114,9 @@ def delete(file_id): # Delete a file from the database
 
     fileSecure = (file_id,) # Secure way of doing SQL query
     cursor = con.cursor()
-    cursor.execute('DELETE FROM files WHERE file_id=?', fileSecure)
+    cursor.execute('DELETE FROM files WHERE file_id=?', fileSecure) # Remove file from database
     con.commit()
     con.close()
     logging.info("User deleted a file record")
 
-    return "Successfully Deleted"
+    return "Successfully deleted file"

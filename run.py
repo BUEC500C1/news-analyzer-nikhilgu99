@@ -27,8 +27,7 @@ def fu_upload(): # Upload file to the database
 
         if f.filename.endswith(".pdf"): # Error checking the filetype 
             f.save(os.path.join(app.config['UPLOAD_FOLDER'], secure_filename(f.filename)))
-            fu.upload(f.filename) # Call the API and upload the file
-            return "Uploaded file: " + f.filename
+            return fu.upload(f.filename) # Call the API and upload the file
         else:
             return "Invalid file uploaded, PDF files only"
     else: # GET request, do nothing here
@@ -39,32 +38,29 @@ def fu_read(): # Grab file from the database
 
     if request.method == 'POST':
         fileid = request.form['fileid']
-        return fu.read(fileid)
-    else: # Get request, do nothing here
+        return fu.read(fileid) # Call the API and read the file
+    else: # GET request, do nothing here
         return "Go back to the home page to retrieve a file!"
 
-@app.route("/fileupload/update", methods=['GET'])
+@app.route("/fileupload/update", methods=['GET', 'POST'])
 def fu_update(): # Update a files info in the database
 
-    if 'filename' in request.args:
-        filename = str(request.args['filename'])
-        
-        if 'entity' in request.args:
-            entity = str(request.args['entity'])
-            return "Updated \"" + filename + "\" entity " + entity
-        else:
-            return "Error: Invalid File Entity Provided"
-    else:
-        return "Error: File Not Found"
+    if request.method == 'POST':
+        file_id = request.form['fileid']
+        id = request.form['attributes']
+        value = request.form['value']
+        return fu.update(file_id,id,value) # Call the API and update the file
+    else: # GET request, do nothing here
+        return "Go back to the home page to update a file!"
 
-@app.route("/fileupload/delete", methods=['GET'])
+@app.route("/fileupload/delete", methods=['GET','POST'])
 def fu_delete(): # Delete a file from the database
 
-    if 'filename' in request.args:
-        filename = str(request.args['filename'])
-        return "Deleted " + filename
-    else:
-        return "Error: File Not Found"
+    if request.method == 'POST':
+        file_id = request.form['fileid']
+        return fu.delete(file_id) # Call the API and delete the file
+    else: # GET request, do nothing here
+        return "Go back to the home page to update a file!"
 
 ### NLP ANALYSIS API ###
 

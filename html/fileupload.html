@@ -10,15 +10,36 @@
     <h3>Upload File:</h3>
     <form action = "http://localhost:5000/fileupload/upload" method = "POST" 
          enctype = "multipart/form-data">
-         <input type = "file" name = "file"/>
-         <input type = "submit"/>
+        <input type = "file" name = "file"/>
+        <input type = "submit"/>
     </form>
     <br>
     <h3>Retrieve File:</h3>
     <form action = "http://localhost:5000/fileupload/read" method = "POST" 
          enctype = "multipart/form-data">
-         <input type="number" id="fileid" name="fileid" min="1">
-         <input type = "submit"/>
+        <input type="number" id="fileid" name="fileid" min="1" placeholder="File ID">
+        <input type = "submit"/>
+    </form>
+    <br>
+    <h3>Update File:</h3>
+    <form action = "http://localhost:5000/fileupload/update" method = "POST" 
+         enctype = "multipart/form-data">
+        <input type="number" id="fileid" name="fileid" min="1" placeholder="File ID" required><br><br>
+        <label for="attributes">Attribute:</label><br>
+        <select id="attributes" name="attributes">
+            <option value="filename">File Name</option>
+            <option value="upload_date">Upload Date</option>
+            <option value="data">Data</option>
+        </select><br><br>
+        <input type="text" name="value" id="value" placeholder="Attribute Value" required>
+        <input type = "submit"/>
+    </form>
+    <br>
+    <h3>Delete File:</h3>
+    <form action = "http://localhost:5000/fileupload/delete" method = "POST" 
+         enctype = "multipart/form-data">
+        <input type="number" id="fileid" name="fileid" min="1" placeholder="File ID">
+        <input type = "submit"/>
     </form>
 
 
