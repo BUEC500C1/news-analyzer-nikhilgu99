@@ -73,10 +73,9 @@ def read(file_id): # Read a text file from the database
         logging.error("ERROR: No file found under the given file ID")
         return "Error: No file found under the given file ID!"
     else:
-        print(data[0]) # data is a tuple, get the text from it
         con.close()
         logging.info("File successfully retrieved from the database")
-        return "Successfully Retrieved"
+        return data[0] # data is a tuple, get the text from it
 
 def update(file_id, id, value): # Update the attributes / metadata of a text file
 

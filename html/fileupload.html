@@ -7,10 +7,20 @@
 <body>
     <h1>File Uploader</h1>
     <br>
+    <h3>Upload File:</h3>
     <form action = "http://localhost:5000/fileupload/upload" method = "POST" 
          enctype = "multipart/form-data">
          <input type = "file" name = "file"/>
          <input type = "submit"/>
-      </form>
+    </form>
+    <br>
+    <h3>Retrieve File:</h3>
+    <form action = "http://localhost:5000/fileupload/read" method = "POST" 
+         enctype = "multipart/form-data">
+         <input type="number" id="fileid" name="fileid" min="1">
+         <input type = "submit"/>
+    </form>
+
+
 </body>
 </html>

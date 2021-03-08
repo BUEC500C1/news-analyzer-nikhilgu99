@@ -34,14 +34,14 @@ def fu_upload(): # Upload file to the database
     else: # GET request, do nothing here
         return "Go back to the home page to upload a file!"
 
-@app.route("/fileupload/read", methods=['GET'])
+@app.route("/fileupload/read", methods=['GET', 'POST'])
 def fu_read(): # Grab file from the database
 
-    if 'filename' in request.args:
-        filename = str(request.args['filename'])
-        return "Retrieved " + filename
-    else:
-        return "Error: File Not Found"
+    if request.method == 'POST':
+        fileid = request.form['fileid']
+        return fu.read(fileid)
+    else: # Get request, do nothing here
+        return "Go back to the home page to retrieve a file!"
 
 @app.route("/fileupload/update", methods=['GET'])
 def fu_update(): # Update a files info in the database
