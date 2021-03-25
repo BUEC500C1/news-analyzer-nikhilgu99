@@ -2,6 +2,8 @@ import flask
 import os
 import sqlite3
 import upload as fu # file upload
+import news as nf # newsfeed
+
 from flask import render_template, request
 from werkzeug.utils import secure_filename
 
@@ -102,25 +104,30 @@ def nlp_classify():
 def nf_all():
     return render_template('newsfeed.html')
 
-@app.route("/newsfeed/keywords", methods=['GET'])
-def nf_keywords():
-    if 'words' in request.args:
-        return "Article 1 URL<br>Article 2 URL<br>Article 3 URL"
-    else:
-        return "Error: No Keywords Supplied"
+@app.route("/newsfeed/keyword", methods=['GET','POST'])
+def nf_keyword():
+    if request.method == 'POST':
+        keyword = request.form['keyword']
+        return nf.queryKeyword(keyword) # Call the API and get articles
+    else: # GET request, do nothing here
+        return "Go back to the home page to search for articles!"
 
-@app.route("/newsfeed/person", methods=['GET'])
-def nf_person():
-    if 'name' in request.args:
-        return "Article 1 URL<br>Article 2 URL<br>Article 3 URL"
-    else:
-        return "Error: No Name Given"
+@app.route("/newsfeed/person", methods=['GET','POST'])
+def nf_person(): # Search for related articles to a person
+    if request.method == 'POST':
+        personName = request.form['personName']
+        return nf.queryPerson(personName) # Call the API and get articles
+    else: # GET request, do nothing here
+        return "Go back to the home page to search for a person!"
 
-@app.route("/newsfeed/historical", methods=['GET'])
+@app.route("/newsfeed/historical", methods=['GET','POST'])
 def nf_historical():
-    if 'year' in request.args and 'month' in request.args and 'words' in request.args:
-        return "Article 1 URL<br>Article 2 URL<br>Article 3 URL"
-    else:
-        return "Error: Missing Information- Year, Month, Keywords"
+    if request.method == 'POST':
+        keyword = request.form['keyword']
+        startDate = request.form['startDate']
+        endDate = request.form['endDate']
+        return nf.queryHistorical(keyword, startDate, endDate) # Call the API and get articles
+    else: # GET request, do nothing here
+        return "Go back to the home page to update a file!"
 
 app.run()

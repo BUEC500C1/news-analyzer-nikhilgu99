@@ -7,7 +7,7 @@
 - User Story: A user can securely upload a PDF file to be converted into a text file for processing by the *Text NLP Analysis* module.
 - Operations: 
     - upload("*filename*") - Upload a file to be converted, will return a message indicating status
-    - read("*file_id*") - Retrieve a text file for viewing, will return a message indicating status, and print text to GUI (?)
+    - read("*file_id*") - Retrieve a text file for viewing, will return a message indicating status, and print text to GUI
     - update("*file_id*","*id*","*value*") - Update the attributes / metadata of an uploaded file, will return a string indicating the status of the operation
     - delete("*file_id*") - Delete a file from the database, will return the status of the operation
 
@@ -24,11 +24,11 @@
 
 ### News Feed Ingestor - Procedure Based API
 
-- User Story: A user can search a database of news articles, and analyze relations between them to better understand them. In this case the database would be conncted to some public news API.
+- User Story: A user can search a database of news articles. In this case the database would be connected to the New York Times API. Queries can be done based on keywords, people, and historically. A maximum of 10 results will be returned, sorted by most recent.
 - Operations:
-    - queryKeywords(*words[]*) - Return a list of articles related to a list of given keywords
+    - queryKeyword(*keyword*) - Return a list of articles related to a given keyword
     - queryPerson("*name*") - Return a list of articles related to a given person's name
-    - queryHistorical(*year*, *month*, *words[]*) - Return a list of articles during a certain month/year, related to a given list of words
+    - queryHistorical(*keyword*, *startDate*, *endDate*) - Return a list of articles during a certain time period, related to a given keyword
 
 
 ### Database Configuration
