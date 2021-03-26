@@ -2,10 +2,50 @@
 
 <head>
     <title>NLP Analysis</title>
+
+    <style type="text/css">
+        #input {
+            background-color: whitesmoke;
+            display: inline-block;
+            vertical-align: middle;
+        }
+    
+        #submit {
+            display: inline-block;
+            vertical-align: middle;
+        }
+        </style>
 </head>
 
 <body>
     <h1>NLP Analysis</h1>
     <br>
+    <h3>Entity Analysis</h3>
+    <form action = "http://localhost:5000/nlp/entity" method = "POST" 
+        enctype = "multipart/form-data">
+        <textarea name="input" id="input" rows=4 cols=30 wrap="hard" required></textarea>
+        <input id="submit" type="submit"/>
+    </form>
+    <br>
+    <h3>Sentiment Analysis</h3>
+    <form action = "http://localhost:5000/nlp/sentiment" method = "POST" 
+        enctype = "multipart/form-data">
+        <textarea name="input" id="input" rows=4 cols=30 wrap="hard" required></textarea>
+        <input id="submit" type="submit"/>
+    </form>
+    <br>
+    <h3>Entity & Sentiment Analysis</h3>
+    <form action = "http://localhost:5000/nlp/entity-sentiment" method = "POST" 
+        enctype = "multipart/form-data">
+        <textarea name="input" id="input" rows=4 cols=30 wrap="hard" required></textarea>
+        <input id="submit" type="submit"/>
+    </form>
+    <br>
+    <h3>Classification Analysis</h3>
+    <form action = "http://localhost:5000/nlp/classify" method = "POST" 
+        enctype = "multipart/form-data">
+        <textarea name="input" id="input" rows=4 cols=30 wrap="hard" required></textarea>
+        <input id="submit" type="submit"/>
+    </form>
 </body>
 </html>

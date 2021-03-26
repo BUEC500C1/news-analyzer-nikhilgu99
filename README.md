@@ -14,10 +14,10 @@
 
 ### Text NLP Analysis - Procedure Based API
 
-- User Story: A user can upload text and run Neural Language Processing (NLP) analysis on it to get certain types of information about the text. (Current stub based off of Google NLP API)
+- User Story: A user can upload text and run Neural Language Processing (NLP) analysis on it to get certain types of information about the text. I chose the IBM Watson Cloud NLP API.
 - Operations:
-    - getSentiment("*text*") - Perform sentiment analysis on text, return a string stating analysis results
     - getEntities("*text*") - Perform entity analysis on text, return a string stating analysis results
+    - getSentiment("*text*") - Perform sentiment analysis on text, return a string stating analysis results
     - getEntitySentiment("*text*") - Perform both entity and sentiment analysis on text, return a string stating analysis results
     - getClassification("*text*") - Perform content classification by topic, return a string stating analysis results
 

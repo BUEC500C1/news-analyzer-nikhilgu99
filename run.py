@@ -3,6 +3,7 @@ import os
 import sqlite3
 import upload as fu # file upload
 import news as nf # newsfeed
+import NLP as nlp # nlp analysis
 
 from flask import render_template, request
 from werkzeug.utils import secure_filename
@@ -70,33 +71,37 @@ def fu_delete(): # Delete a file from the database
 def nlp_all():
     return render_template('nlp.html')
 
-@app.route("/nlp/sentiment", methods=['GET'])
+@app.route("/nlp/sentiment", methods=['GET','POST'])
 def nlp_sentiment():
-    if 'text' in request.args:
-        return "Score: 0.9 (Positive)"
-    else:
-        return "Error: No Text Given"
+    if request.method == 'POST':
+        inp = request.form['input']
+        return nlp.getSentiment(inp) # Call the API and run NLP entity analysis
+    else: # GET request, do nothing here
+        return "Go back to the home page to do sentiment analysis!"
 
-@app.route("/nlp/entity", methods=['GET'])
+@app.route("/nlp/entity", methods=['GET','POST'])
 def nlp_entity():
-    if 'text' in request.args:
-        return "Found: xyz nouns, xyz names"
-    else:
-        return "Error: No Text Given"
+    if request.method == 'POST':
+        inp = request.form['input']
+        return nlp.getEntities(inp) # Call the API and run NLP entity analysis
+    else: # GET request, do nothing here
+        return "Go back to the home page to do entity analysis!"
 
-@app.route("/nlp/entity-sentiment", methods=['GET'])
+@app.route("/nlp/entity-sentiment", methods=['GET','POST'])
 def nlp_entity_sentiment():
-    if 'text' in request.args:
-        return "Score: 0.9 (Positive)<br>Found xyz names, xyz nouns."
-    else:
-        return "Error: No Text Found"
+    if request.method == 'POST':
+        inp = request.form['input']
+        return nlp.getEntitySentiment(inp) # Call the API and run NLP entity-sentiment analysis
+    else: # GET request, do nothing here
+        return "Go back to the home page to do entity-sentiment analysis!"
 
-@app.route("/nlp/classify", methods=['GET'])
+@app.route("/nlp/classify", methods=['GET','POST'])
 def nlp_classify():
-    if 'text' in request.args:
-        return "Topic: Computer Science<br>Confidence: 0.9"
-    else:
-        return "Error: No Text Found"
+    if request.method == 'POST':
+        inp = request.form['input']
+        return nlp.getClassification(inp) # Call the API and run NLP classifcation analysis
+    else: # GET request, do nothing here
+        return "Go back to the home page to do classification analysis!"
 
 ### NEWSFEED INGESTOR API ###
 
