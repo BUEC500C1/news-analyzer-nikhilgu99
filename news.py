@@ -16,7 +16,7 @@ def queryKeyword(keyword): # Get a list of articles related to a list of keyword
     logging.info("User has queried for articles using keyword: " + keyword)
 
     keyword = keyword.replace(" ", "%20")
-    url = "https://api.nytimes.com/svc/search/v2/articlesearch.json?q=" + keyword + "&api-key=OQ6qAxiPHDFQFFXB8J9AfZ4mOXwlDEX2"
+    url = "http://api.nytimes.com/svc/search/v2/articlesearch.json?q=" + keyword + "&api-key=OQ6qAxiPHDFQFFXB8J9AfZ4mOXwlDEX2"
     jsonurl = urlopen(url)
     fulltext = json.loads(jsonurl.read())
 
@@ -64,7 +64,7 @@ def queryHistorical(keyword, startDate, endDate): # Get a list of articles relat
     startDate = startDate.replace("-", "")
     endDate = endDate.replace("-", "")
 
-    url = "https://api.nytimes.com/svc/search/v2/articlesearch.json?q=" + keyword + "&facet_fields=source&facet=true&begin_date=" + startDate + "&end_date=" + endDate + "&api-key=OQ6qAxiPHDFQFFXB8J9AfZ4mOXwlDEX2"
+    url = "http://api.nytimes.com/svc/search/v2/articlesearch.json?q=" + keyword + "&facet_fields=source&facet=true&begin_date=" + startDate + "&end_date=" + endDate + "&api-key=OQ6qAxiPHDFQFFXB8J9AfZ4mOXwlDEX2"
     jsonurl = urlopen(url)
     fulltext = json.loads(jsonurl.read())
 
