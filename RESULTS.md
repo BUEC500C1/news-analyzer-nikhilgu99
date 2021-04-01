@@ -7,13 +7,15 @@ What I have done to demonstrate my project is first show what the UI looks like,
 
 ### Home Page
 ![Home Page](images/home.png)
+<br>
+
+### Database Setup
+![Database](images/db.png)
+<br>
 
 ### File Upload API
 ![File Upload, home](images/fileupload_home.png)
 <br>
-
-#### Database Setup
-![Database](images/db.png)
 
 - upload(test.pdf): The input PDF file can be found in the root of this repo. The output here on a successful upload is: *Successfully uploaded file*. Otherwise, an error message is returned for either a failed database connection or an invalid filetype. In this case the entry will go in the database with ID 2.
 <br>
@@ -36,19 +38,19 @@ What I have done to demonstrate my project is first show what the UI looks like,
 The *input* string for the NLP functions here is the text from the article at this URL: 
 https://www.espn.com/nhl/story/_/id/31174707/buffalo-sabres-beat-philadelphia-flyers-snap-18-game-winless-streak
 
-- getEntities(*input*): The input is text from the article URL mentioned above. The output is an HTML formatted string, showing the determined entities and their type.
+- getEntities(*input*): The input is text from the article URL mentioned above. The output is an HTML formatted string, showing the determined entities and their type.<br>
 ![NLP, entity](images/nlp_entity.png)
 <br>
 
-- getSentiment(*input*): The input is the text from the article URL mentioned above. The output is an HTML formatted string. showing the sentiment and its confidence.
+- getSentiment(*input*): The input is the text from the article URL mentioned above. The output is an HTML formatted string. showing the sentiment and its confidence.<br>
 ![NLP, sentiment](images/nlp_sentiment.png)
 <br>
 
-- getEntitySentiment(*input*): The input is the text from the article URL mentioned above. The output is a combination of the above two functions.
+- getEntitySentiment(*input*): The input is the text from the article URL mentioned above. The output is a combination of the above two functions.<br>
 ![NLP, entity & sentiment](images/nlp_entity_sentiment.png)
 <br>
 
-- getClassification(*input*): The input is the text from the article URL mentioned above. The output is an HTML formatted string, showing the determined categories and the confidence.
+- getClassification(*input*): The input is the text from the article URL mentioned above. The output is an HTML formatted string, showing the determined categories and the confidence.<br>
 ![NLP, classification](images/nlp_classify.png)
 <br>
 
